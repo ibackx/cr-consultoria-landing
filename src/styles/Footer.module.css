@@ -1,0 +1,2 @@
+.footer { padding: 28px 0; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.12); }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 24px; text-align: center; color: var(--muted); }

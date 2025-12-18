@@ -1,0 +1,2 @@
+.whatsapp { position: fixed; right: 18px; bottom: 18px; background: linear-gradient(135deg, #25D366, #a7f3d0); color: #0c1b2e; padding: 12px 14px; border-radius: 999px; font-weight: 800; box-shadow: 0 10px 28px rgba(37,211,102,0.35); border: 0; }
+.whatsapp:hover { transform: translateY(-2px); transition: transform 140ms ease; }

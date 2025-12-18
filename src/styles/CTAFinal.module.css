@@ -1,0 +1,5 @@
+.section { padding: 80px 0; position: relative; }
+.section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 0%, rgba(139,92,246,0.25) 0%, rgba(139,92,246,0) 60%); pointer-events: none; }
+.container { max-width: 880px; margin: 0 auto; padding: 0 24px; text-align: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,0.35); padding-top: 36px; padding-bottom: 36px; }
+.cta { display: inline-block; margin-top: 16px; background: linear-gradient(135deg, var(--brand-1), var(--brand-2)); color: #06111f; padding: 14px 20px; border-radius: 12px; font-weight: 800; box-shadow: 0 10px 30px rgba(6,182,212,0.25); }
+.cta:hover { transform: translateY(-2px); }
