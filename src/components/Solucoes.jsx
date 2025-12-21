@@ -1,22 +1,39 @@
 import React from 'react'
 import styles from '../styles/Solucoes.module.css'
 
-const cards = [
+const destaques = [
   {
-    title: 'Consultoria em Inteligência Artificial',
-    desc: 'Diagnóstico, estratégia e roadmap para adoção de IA com foco em ROI.'
+    slug: 'cuida',
+    title: 'CUIDA — Saúde Inteligente',
+    desc: 'IA aplicada para apoiar equipes médicas e reconectar pacientes ao cuidado contínuo.',
+    href: '/produtos/cuida'
   },
   {
-    title: 'Automação de Processos',
-    desc: 'Automatização de tarefas e integrações para ganho de eficiência operacional.'
+    slug: 'reserveone',
+    title: 'ReserveOne — Reservas Omnicanal',
+    desc: 'Motor de reservas conectado ao WhatsApp, web e backoffice — aumenta conversão e simplifica a operação.',
+    href: '/produtos/reserveone'
+  }
+]
+
+const categorias = [
+  {
+    key: 'automacao-ia',
+    title: 'IA e Automação para Negócios',
+    desc: 'Agentes e automações que eliminam tarefas operacionais e elevam as pessoas para um papel mais estratégico.',
+    href: '/solucoes/automacao-ia'
   },
   {
-    title: 'Inteligência de Dados e Dashboards',
-    desc: 'Estruturação de dados, KPIs e painéis para tomada de decisão.'
+    key: 'dados-decisao',
+    title: 'Dados, BI e Decisão Inteligente',
+    desc: 'Transformamos dados financeiros e operacionais em decisões claras e acionáveis, com dashboards inteligentes e visão em tempo real do negócio.',
+    href: '/solucoes/dados-e-decisao'
   },
   {
-    title: 'Agentes de IA para Atendimento e Vendas',
-    desc: 'Assistentes inteligentes para qualificação de leads e suporte ao cliente.'
+    key: 'solucoes-digitais',
+    title: 'Soluções Digitais',
+    desc: 'Web institucional e e‑commerce prontos para venda e comunicação.',
+    href: '/solucoes/solucoes-digitais'
   }
 ]
 
@@ -24,12 +41,33 @@ export default function Solucoes() {
   return (
     <section id="solucoes" className={styles.section}>
       <div className={styles.container}>
-        <h2>Soluções</h2>
-        <div className={styles.grid}>
-          {cards.map((card) => (
-            <article key={card.title} className={styles.card}>
-              <h3>{card.title}</h3>
-              <p>{card.desc}</p>
+        <div className={styles.headerRow}>
+          <h2 className="gradientText">Soluções</h2>
+        </div>
+
+        {/* Destaques */}
+        <div className={styles.blockTitle}>Soluções Estratégicas</div>
+        <div className={styles.featured}>
+          {destaques.map((s) => (
+            <article key={s.slug} className={styles.featureCard}>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              <a href={s.href} className={styles.ctaPrimary}>Conhecer solução</a>
+            </article>
+          ))}
+        </div>
+
+        {/* Categorias */}
+        <div className={styles.blockTitle}>Outras Soluções</div>
+        <div className={styles.categories}>
+          {categorias.map((c) => (
+            <article key={c.key} className={styles.categoryCard}>
+              <div className={styles.cardHeader}>
+                <h3>{c.title}</h3>
+                {c.badge && <span className={styles.badge}>{c.badge}</span>}
+              </div>
+              <p>{c.desc}</p>
+              <a href={c.href} className={styles.ctaSecondary}>Ver soluções</a>
             </article>
           ))}
         </div>
