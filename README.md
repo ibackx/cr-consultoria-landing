@@ -1,3 +1,21 @@
+## Configuração de disponibilidade via Google Calendar
+
+Para validar horários diretamente no seu Google Calendar antes de oferecer os slots, configure:
+
+1. Crie uma chave de API no Google Cloud (APIs & Services) e habilite a API "Google Calendar".
+2. Torne o calendário que será usado como "público" para leitura OU forneça OAuth (privado) posteriormente.
+3. No projeto, defina as variáveis no `.env` (usando Vite):
+
+```
+VITE_GOOGLE_API_KEY=SEU_API_KEY
+VITE_GOOGLE_CALENDAR_ID=seu_calendario_id@group.calendar.google.com
+```
+
+Alternativamente, edite diretamente `src/config/calendar.js`.
+
+Com isso, o modal irá buscar os eventos do dia e desabilitar os horários ocupados.
+
+Observação: para calendários privados sem torná-los públicos, podemos integrar OAuth (Google Identity Services) para obter um token de acesso e ler os eventos com consentimento. Fale conosco para habilitar esse fluxo.
 # CR Consultoria - Landing Page (pt-BR)
 
 Landing page corporativa B2B focada em conversão, performance e SEO, construída com React + Vite e CSS Modules.
