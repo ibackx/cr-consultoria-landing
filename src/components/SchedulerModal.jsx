@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styles from '../styles/SchedulerModal.module.css'
 import { fetchDayBusy, slotOverlaps } from '../lib/calendarAvailability'
 import { DISABLE_WEEKENDS } from '../config/calendar'
+import { createBooking } from '../lib/api'
 
 function addMinutes(date, minutes) {
   const d = new Date(date)
@@ -55,25 +56,20 @@ function buildDailySlots(baseDate) {
   return slots
 }
 
-function loadBooked() {
-  try {
-    const raw = localStorage.getItem('crc_bookings')
-    return raw ? JSON.parse(raw) : []
-  } catch {
-    return []
-  }
-}
-
-function saveBooked(list) {
-  localStorage.setItem('crc_bookings', JSON.stringify(list))
-}
+// Local booked storage removed: rely on real calendar busy via backend
 
 export default function SchedulerModal({ isOpen, onClose }) {
   const [dateStr, setDateStr] = useState(() => toDateInputValue(new Date()))
   const [loading, setLoading] = useState(false)
-  const [bookedMap, setBookedMap] = useState(() => new Set())
+  // Removed local booked map
   const [remoteBusy, setRemoteBusy] = useState([])
   const [selected, setSelected] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitOk, setSubmitOk] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [notes, setNotes] = useState('')
   const closeBtnRef = useRef(null)
 
   const dateObj = useMemo(() => {
@@ -85,7 +81,6 @@ export default function SchedulerModal({ isOpen, onClose }) {
 
   const slots = useMemo(() => {
     const all = buildDailySlots(dateObj)
-    const booked = bookedMap
     const filtered = all
       .filter(s => {
         // Hide past slots if date is today
@@ -97,10 +92,10 @@ export default function SchedulerModal({ isOpen, onClose }) {
     const withRemote = filtered.map(s => ({
         ...s,
         key: s.start.toISOString(),
-        available: !booked.has(s.start.toISOString()) && !remoteBusy.some(ev => slotOverlaps(s, ev)),
+        available: !remoteBusy.some(ev => slotOverlaps(s, ev)),
       }))
     return withRemote
-  }, [dateObj, now, bookedMap, remoteBusy])
+  }, [dateObj, now, remoteBusy])
 
   useEffect(() => {
     if (!isOpen) return
@@ -127,10 +122,6 @@ export default function SchedulerModal({ isOpen, onClose }) {
   useEffect(() => {
     if (!isOpen) return
     setLoading(true)
-    // local booked
-    const booked = new Set(loadBooked())
-    setBookedMap(booked)
-
     // remote Google Calendar busy
     let cancelled = false
     ;(async () => {
@@ -147,12 +138,9 @@ export default function SchedulerModal({ isOpen, onClose }) {
   }, [isOpen, dateObj])
 
   function bookSlot(slot) {
-    const list = loadBooked()
-    if (list.includes(slot.start.toISOString())) return
-    const newList = [...list, slot.start.toISOString()]
-    saveBooked(newList)
-    setBookedMap(new Set(newList))
     setSelected(slot)
+    setSubmitOk(false)
+    setSubmitError('')
   }
 
   function downloadICS(slot) {
@@ -249,10 +237,56 @@ export default function SchedulerModal({ isOpen, onClose }) {
           <div className={styles.confirm}>
             <h4>Consulta agendada!</h4>
             <p>{dateObj.toLocaleDateString()} · {fmtTime(selected.start)} – {fmtTime(selected.end)}</p>
-            <div className={styles.actions}>
-              <a className={styles.primary} href={gCalLink(selected)} target="_blank" rel="noreferrer">Adicionar ao Google Calendar</a>
-              <button className={styles.secondary} onClick={() => downloadICS(selected)}>Baixar .ics</button>
-              <button className={styles.ghost} onClick={onClose}>Fechar</button>
+              <div className={styles.form}>
+              <p>Opcional: informe seu email para enviarmos o convite e registrar em nosso calendário automaticamente.</p>
+              <div className={styles.formRow}>
+                <label>
+                  Nome
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome" />
+                </label>
+              </div>
+              <div className={styles.formRow}>
+                <label>
+                  Email
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="voce@exemplo.com" />
+                </label>
+              </div>
+              <div className={styles.formRow}>
+                <label>
+                  Observações
+                  <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Assunto, preferências, etc." />
+                </label>
+              </div>
+              <div className={styles.actions}>
+                <button
+                  disabled={submitting}
+                  className={styles.primary}
+                  onClick={async () => {
+                    try {
+                      setSubmitting(true)
+                      await createBooking({
+                        start: selected.start.toISOString(),
+                        end: selected.end.toISOString(),
+                        name, email, notes,
+                      })
+                      setSubmitOk(true)
+                      setSubmitError('')
+                      onClose?.() // auto close on success
+                    } catch (e) {
+                      setSubmitError('Falha ao registrar no calendário da CR. Tente novamente em alguns instantes.')
+                    } finally {
+                      setSubmitting(false)
+                    }
+                  }}
+                >{submitting ? 'Enviando…' : 'Enviar convite e notificar CR'}</button>
+                <button className={styles.ghost} onClick={onClose}>Fechar</button>
+              </div>
+              {submitOk && (
+                <div className={styles.note} aria-live="polite">Convite enviado e reunião registrada no calendário da CR.</div>
+              )}
+              {submitError && (
+                <div className={styles.error} role="alert">{submitError}</div>
+              )}
             </div>
           </div>
         )}

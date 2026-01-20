@@ -1,4 +1,4 @@
-import { GOOGLE_API_KEY, GOOGLE_CALENDAR_ID } from '../config/calendar'
+import { API_BASE } from './api'
 
 function toISO(date) {
   return new Date(date).toISOString()
@@ -17,38 +17,22 @@ function endOfDayLocal(date) {
 }
 
 export async function fetchDayBusy(dateObj) {
-  if (!GOOGLE_API_KEY || !GOOGLE_CALENDAR_ID) {
-    return { busy: [], source: 'local' }
-  }
   const timeMin = toISO(startOfDayLocal(dateObj))
   const timeMax = toISO(endOfDayLocal(dateObj))
 
-  const url = new URL(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events`)
-  url.searchParams.set('key', GOOGLE_API_KEY)
-  url.searchParams.set('timeMin', timeMin)
-  url.searchParams.set('timeMax', timeMax)
-  url.searchParams.set('singleEvents', 'true')
-  url.searchParams.set('orderBy', 'startTime')
-  url.searchParams.set('showDeleted', 'false')
-  url.searchParams.set('maxResults', '250')
-
-  const res = await fetch(url.toString())
-  if (!res.ok) {
-    // fail soft; no remote busy data
-    return { busy: [], source: 'error', status: res.status }
+  // Always use backend OAuth to support private calendars and avoid 404s
+  try {
+    const url = new URL(`${API_BASE}/day-busy`, window.location.origin)
+    url.searchParams.set('timeMin', timeMin)
+    url.searchParams.set('timeMax', timeMax)
+    const res = await fetch(url.toString())
+    if (!res.ok) throw new Error('backend busy failed')
+    const data = await res.json()
+    const busy = (data.busy || []).map(b => ({ start: new Date(b.start), end: new Date(b.end) }))
+    return { busy, source: 'backend' }
+  } catch {
+    return { busy: [], source: 'local' }
   }
-  const data = await res.json()
-  const busy = (data.items || []).map(ev => {
-    const start = ev.start?.dateTime || ev.start?.date
-    const end = ev.end?.dateTime || ev.end?.date
-    return {
-      start: new Date(start),
-      end: new Date(end),
-      id: ev.id,
-      summary: ev.summary,
-    }
-  })
-  return { busy, source: 'google' }
 }
 
 export function slotOverlaps(slot, event) {
