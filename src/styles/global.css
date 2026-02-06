@@ -26,6 +26,8 @@ body {
   overflow-x: hidden;
 }
 
+html { scroll-behavior: smooth; }
+
 body::before {
   content: "";
   position: fixed; inset: 0; pointer-events: none; z-index: -1;

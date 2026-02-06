@@ -1,0 +1,60 @@
+.page{background:#091420;color:#e5f0ff;--cuida-accent:#20caa1;--cuida-accent-2:#7cc8ff;--cuida-accent-soft:rgba(32,202,161,0.18)}
+.container{max-width:1040px;margin:0 auto;padding:24px}
+.hero{padding:64px 0;background:linear-gradient(180deg,rgba(17,94,206,0.15),rgba(6,182,212,0.08))}
+.title{font-size:32px;line-height:1.2;margin:0 0 12px}
+.subtitle{font-size:18px;color:#c9deff;max-width:820px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.ctaPrimary{background:linear-gradient(135deg,var(--brand-1),var(--brand-2));color:#06111f;padding:10px 16px;border-radius:10px;font-weight:800;border:none;cursor:pointer}
+.ctaSecondary{background:#0f1d31;color:#d9ecff;border:1px solid rgba(124,200,255,0.35);padding:10px 16px;border-radius:10px;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease}
+.ctaSecondary:hover{background:var(--cuida-accent-soft);border-color:var(--cuida-accent);color:#e5f7f3}
+.section{padding:40px 0}
+.sectionAlt{padding:40px 0;background:#0b1624;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+.lead{color:#c9deff}
+.highlight{color:var(--cuida-accent-2)}
+
+/* Badge */
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(124,200,255,0.35);background:rgba(124,200,255,0.08);color:#d9ecff;border-radius:999px;padding:6px 12px;font-weight:700;font-size:12px}
+.badgeDot{width:8px;height:8px;border-radius:50%;background:var(--cuida-accent)}
+.badgeText{letter-spacing:.2px}
+.listBullets{margin:16px 0 0;display:grid;gap:8px}
+.listBullets li{position:relative;padding-left:26px}
+.listBullets li::before{content:"";position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:8px;background:var(--cuida-accent-soft);border:1px solid var(--cuida-accent)}
+
+/* Clinical bullets alternative with icons */
+.clinicalList{margin:20px 0 0;display:grid;gap:10px}
+.clinicalItem{display:flex;gap:10px;align-items:flex-start}
+.clinicalIcon{flex:0 0 18px;width:18px;height:18px;stroke:var(--cuida-accent);fill:none;stroke-width:2;margin-top:2px}
+.listColumns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cards3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.card{background:#0f1d31;border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:16px}
+.cardTitle{display:flex;align-items:center;gap:8px}
+.icon{width:18px;height:18px;stroke:var(--cuida-accent);fill:none;stroke-width:2}
+.iconSolid{fill:var(--cuida-accent-soft);stroke:var(--cuida-accent);stroke-width:2}
+
+/* Benefit groups */
+.benefitGroup{background:#0f1d31;border:1px solid rgba(124,200,255,0.25);border-radius:12px;padding:16px}
+.benefitHeader{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.benefitIcon{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:6px;background:var(--cuida-accent-soft);border:1px solid var(--cuida-accent);color:#e5f7f3;font-size:14px}
+.benefitIcon svg{width:16px;height:16px}
+.benefitIcon svg *{stroke:var(--cuida-accent);fill:none}
+.benefitBody{display:block;color:#cfe7ff}
+.benefitBody p{margin:0 0 6px}
+.timeline5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:16px}
+.step{background:#0f1d31;border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:12px}
+.stepNum{font-weight:900;background:var(--cuida-accent-soft);display:inline-block;border-radius:8px;padding:4px 8px;margin-bottom:8px;border:1px solid var(--cuida-accent)}
+.stepBody h3{margin:0 0 6px}
+
+/* Strong clinical flow */
+.flow{position:relative;margin-top:20px}
+.flow::before{content:none}
+.clinicalStep{position:relative;display:flex;flex-direction:column;gap:10px;background:#0f1d31;border:1px solid rgba(124,200,255,0.25);border-radius:14px;padding:18px;box-sizing:border-box}
+.stepHeader{display:flex;align-items:center;gap:10px;min-height:56px;flex-wrap:wrap}
+.stepTitle{margin:0;flex:1;min-width:0;font-size:15px;line-height:1.2}
+.stepDescription{margin:0;color:#cfe7ff}
+.stepNumber{width:56px;height:56px;display:grid;place-items:center;text-align:center;font-weight:900;color:#e8fff9;background:var(--cuida-accent-soft);border:1px solid var(--cuida-accent);border-radius:14px;font-size:22px;line-height:1;overflow:hidden;box-sizing:border-box;flex-shrink:0;padding:0 3px;font-variant-numeric: tabular-nums}
+.stepNumber span{display:block}
+.stepContent h3{margin:0 0 4px}
+.stepContent p{margin:0;color:#cfe7ff}
+.ctaSection{padding:40px 0;background:linear-gradient(180deg,rgba(17,94,206,0.12),rgba(6,182,212,0.06))}
+@media(max-width:840px){.timeline5{grid-template-columns:1fr 1fr}.cards3{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.timeline5{grid-template-columns:1fr}.cards3{grid-template-columns:1fr}.listColumns{grid-template-columns:1fr}}

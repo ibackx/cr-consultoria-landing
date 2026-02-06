@@ -1,0 +1,69 @@
+/* CUIDA Light Theme: calm, clinical, visual-first */
+.page{background:#f8fbfd;color:#0b1c2c}
+.container{max-width:1140px;margin:0 auto;padding:28px}
+
+/* Typography (scoped via classes only) */
+.lead{color:#2f4256}
+.muted{color:#5b6d80}
+
+/* Palette */
+:root{--cuida-primary:#20caa1;--cuida-primary-2:#5ec9de;--cuida-bg:#ffffff;--cuida-soft:#eef9f6}
+
+/* Hero visual */
+.hero{padding:56px 0;background:#ffffff}
+.heroWrap{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:center}
+.heroTitle{font-size:36px;line-height:1.1}
+.heroSubtitle{font-size:18px;color:#2f4256}
+.heroImage{width:100%;height:280px;border-radius:16px;background:linear-gradient(135deg,#e8f9f5,#f4fbff);border:1px solid #dbe9f0;overflow:hidden}
+.heroImage img{width:100%;height:100%;object-fit:cover;display:block}
+.heroBadge{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;color:#0b1c2c}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--cuida-primary)}
+
+/* Diagram: Paciente → IA → Equipe de Saúde */
+.diagram{background:#ffffff;padding:40px 0;border-top:1px solid #e7eff5;border-bottom:1px solid #e7eff5}
+.diagramTitle{font-size:14px;color:#5b6d80;margin:0 0 16px; text-align:center}
+.diagramRow{display:grid;grid-template-columns:1fr 80px 1fr 80px 1fr;gap:12px;align-items:center}
+.node{display:flex;flex-direction:column;align-items:center;gap:10px}
+.nodeIcon{width:96px;height:96px;border-radius:20px;background:#eef9f6;border:1px solid #bfe9dc;display:grid;place-items:center}
+.nodeIcon svg{width:52px;height:52px}
+.nodeIcon svg *{stroke:var(--cuida-primary);fill:none;stroke-width:2}
+.nodeLabel{font-weight:700;color:#0b1c2c}
+.nodeRole{font-size:13px;color:#5b6d80}
+.arrow{height:2px;background:linear-gradient(90deg,var(--cuida-primary),var(--cuida-primary-2));border-radius:2px}
+
+/* Pillars: 3 ideas */
+.pillars{background:#ffffff;padding:36px 0}
+.pillarsGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pillar{background:#fcfefe;border:1px solid #cfe1eb;border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.pillarIcon{width:72px;height:72px;border-radius:16px;background:#eef9f6;border:1px solid #bfe9dc;display:grid;place-items:center}
+.pillarIcon svg{width:40px;height:40px}
+.pillarIcon svg *{stroke:var(--cuida-primary);fill:none;stroke-width:2}
+.pillarText{font-size:16px;font-weight:800;text-align:center;color:#0b1c2c}
+.pillarSub{font-size:13px;color:#5b6d80;text-align:center}
+
+/* Horizontal flow */
+.flow{background:#ffffff;padding:40px 0;border-top:1px solid #e7eff5;border-bottom:1px solid #e7eff5}
+.flowRow{display:grid;grid-template-columns:repeat(9,1fr);gap:10px;align-items:center}
+.step{display:flex;flex-direction:column;align-items:center;gap:8px}
+.stepIcon{width:72px;height:72px;border-radius:16px;background:#eef9f6;border:1px solid #bfe9dc;display:grid;place-items:center}
+.stepIcon svg{width:32px;height:32px}
+.stepIcon svg *{stroke:var(--cuida-primary);fill:none;stroke-width:2}
+.stepLabel{font-size:14px;font-weight:700;color:#0b1c2c}
+.stepSub{font-size:12px;color:#5b6d80;text-align:center}
+.flowArrow{height:2px;background:#cfe9f4;border-radius:2px}
+
+/* Complementary text */
+.textBlock{background:#ffffff;padding:32px 0}
+.textWrap{max-width:900px;margin:0 auto;color:#2f4256}
+
+@media(max-width:960px){
+  .heroWrap{grid-template-columns:1fr}
+  .diagramRow{grid-template-columns:1fr 60px 1fr 60px 1fr}
+  .nodeIcon{width:80px;height:80px}
+  .pillarsGrid{grid-template-columns:1fr 1fr}
+  .flowRow{grid-template-columns:repeat(7,1fr)}
+}
+@media(max-width:640px){
+  .pillarsGrid{grid-template-columns:1fr}
+  .flowRow{grid-template-columns:1fr}
+}

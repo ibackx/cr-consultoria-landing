@@ -1,2 +1,10 @@
 .footer { padding: 28px 0; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.12); }
 .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; text-align: center; color: var(--muted); }
+
+/* Light variant (CUIDA) */
+.footerLight { padding: 28px 0; border-top: 1px solid #d7ece6; background: linear-gradient(180deg, #f8fcfa 0%, #f2fbf7 100%); }
+.containerLight { max-width: var(--container); margin: 0 auto; padding: 0 24px; text-align: center; color: #6f8f86; }
+
+.links { display: flex; gap: 14px; justify-content: center; margin-bottom: 8px; }
+.link { color: #6f8f86; text-decoration: none; font-size: 14px; }
+.link:hover { text-decoration: underline; }

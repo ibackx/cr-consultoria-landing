@@ -6,13 +6,13 @@ const destaques = [
     slug: 'cuida',
     title: 'CUIDA — Saúde Inteligente',
     desc: 'IA aplicada para apoiar equipes médicas e reconectar pacientes ao cuidado contínuo.',
-    href: '/produtos/cuida'
+    href: '/CUIDA'
   },
   {
     slug: 'reserveone',
     title: 'ReserveOne — Reservas Omnicanal',
-    desc: 'Motor de reservas conectado ao WhatsApp, web e backoffice — aumenta conversão e simplifica a operação.',
-    href: '/produtos/reserveone'
+    desc: 'Motor de reservas centralizado com chat próprio, web e backoffice — mais controle, menos erros e mais conversão.',
+    href: '/reserveone'
   }
 ]
 
@@ -21,19 +21,19 @@ const categorias = [
     key: 'automacao-ia',
     title: 'IA e Automação para Negócios',
     desc: 'Agentes e automações que eliminam tarefas operacionais e elevam as pessoas para um papel mais estratégico.',
-    href: '/solucoes/automacao-ia'
+    href: '/ia-automacao'
   },
   {
     key: 'dados-decisao',
     title: 'Dados, BI e Decisão Inteligente',
     desc: 'Transformamos dados financeiros e operacionais em decisões claras e acionáveis, com dashboards inteligentes e visão em tempo real do negócio.',
-    href: '/solucoes/dados-e-decisao'
+    href: '/dados-e-decisao'
   },
   {
     key: 'solucoes-digitais',
     title: 'Soluções Digitais',
     desc: 'Web institucional e e‑commerce prontos para venda e comunicação.',
-    href: '/solucoes/solucoes-digitais'
+    href: '/solucoes-digitais'
   }
 ]
 
